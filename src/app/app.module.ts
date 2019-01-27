@@ -14,10 +14,11 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { Routes, RouterModule} from '@angular/router';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { ProductService } from './shared/product.service';
 
  const routeConfig: Routes = [
    {path: '', component: HomeComponent},
-   {path: 'product/:productTitle', component: ProductDetailComponent}
+   {path: 'product/:productId', component: ProductDetailComponent}
  ];
 @NgModule({
   declarations: [
@@ -38,7 +39,7 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule,
     RouterModule.forRoot(routeConfig)
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
