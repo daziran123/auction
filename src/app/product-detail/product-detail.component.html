@@ -7,17 +7,40 @@
   <div>
     <p class="pull-right">{{comments.length}}</p>
     <p>
-      <app-starts [rating]="product.rating"></app-starts>
+      <app-starts [rating]="product.rating" [readonly]="true"></app-starts>
     </p>
   </div>
 </div>
 <div class="well">
+<div>
+  <button class="btn btn-success" (click)="isCommentHidden =!isCommentHidden">我要评论</button>
+</div>
+<div [hidden]="isCommentHidden">
+  <div><app-starts [(rating)]="newRating" [readonly]="false"></app-starts></div>
+<!-- rating 变化会影响 newRating.
+ 只有 输出属性是 输入属性+ change的时候才能用  [(rating)]="newRating"  这种语法
+@Input()
+public rating = 0;
+
+@Output()
+public ratingChange:EventEmitter<number> =new EventEmitter(); -->
+
+  <!-- 双向数据绑定 -->
+  <div>
+    <textarea [(ngModel)]="newComment"></textarea>
+  </div>
+  <!-- 提交评论事件 -->
+<div>
+  <button class="btn btn-success " (click)="addComment()"> 发表评论</button>
+</div>
+  </div>
   <div class="row" *ngFor="let comment of comments">
   <hr>
   <div class="col-md-12">
     <app-starts [rating]="comment.rating"></app-starts>
+    
     <span>{{comment.user}}</span>
-    <span class="pull-right">{{comment.timestamp}}</span>
+    <span class="pull-right">{{comment.timestamp}</span>
     <p>{{comment.content}}</p>
   </div>
  

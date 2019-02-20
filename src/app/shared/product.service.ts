@@ -30,6 +30,10 @@ export class ProductService {
     return this.products;
     // 把数组返回去
   }
+
+  getAllCategories(): string[] {
+return ["电子","IT","图书"]
+  }
   getProduct(id: number): Product {
     return this.products.find((product) => product.id == id);
   }

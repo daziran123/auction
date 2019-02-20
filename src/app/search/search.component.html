@@ -1,20 +1,27 @@
-<form name="searchForm" role="form">
-    <div class="form-group">
+<form [formGroup]="formModel" (ngSubmit)="onSearch()" novalidate>
+    <!-- formGroup 和后边的formModel 连接起来,把ngsubmit交给  onsearch 函数  最后禁止浏览器自带的验证 -->
+    <div class="form-group" [class.has-error]="formModel.hasError('minlength','title')">
+    
         <label for="productTitle">商品名称:</label>
-        <input type="text" class="form-control" id="productTitle" placeholder="商品名称">
+        <input formControlName="title" type="text" class="form-control" id="productTitle" placeholder="商品名称">
+        <span class="help-block" [class.hidden]= "!formModel.hasError('minlength','title')">
+            请至少输入三个字
+        </span>
       </div>
-      <div class="form-group">
+
+
+      <div class="form-group" [class.has-error]="formModel.hasError('positiveNumber','price')">
           <label for="productPrice">商品价格:</label>
-          <input type="number" class="form-control" id="productPrice" placeholder="商品价格">
+          <input formControlName="price" type="number" class="form-control" id="productPrice" placeholder="商品价格">
+          <span class="help-block" [class.hidden]= "!formModel.hasError('positiveNumber','price')">
+                请至少输入正值
+            </span>
         </div>
         <div class="form-group">
             <label for="producCategory">商品类别:</label>
-           <select class="form-control" id="producCategory">
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
+           <select formControlName="category"  id="productCategory" class="form-control" id="producCategory">
+<option value="-1">全部分类</option>
+<option *ngFor="let category of categories" [value]="category">{{category}}</option>
            </select>
           </div>
           <div class="form-group">

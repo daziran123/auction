@@ -1,4 +1,15 @@
-<div *ngFor = "let product of products" class="col-md-4 col-sm-4 col-lg-4" >
+<div class="row">
+  <div class="col-sm-12">
+    <div class="form-group">
+      <input class="form-control"  placeholder="请输入课程名称" 
+      [formControl]="titleFilter" >
+     <!-- 输入框跟控制器 titleFilter类型为formControl 绑定到一块了，当input值发生改变的时候titleFilter往外发射valueChange事件
+     我们要做的是要订阅，把值保存到keyword字段上去 ，那么如何订阅呢 去看构造函数-->
+    </div>
+  </div>
+
+</div>
+<div *ngFor = "let product of products | filter:'title': keyword" class="col-md-4 col-sm-4 col-lg-4" >
   <div class="thumbnail">
     <img [src]="imgSrc">
     <div class="caption">

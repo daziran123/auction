@@ -12,9 +12,10 @@ import { StartsComponent } from './starts/starts.component';
 import { HomeComponent } from './home/home.component';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { Routes, RouterModule} from '@angular/router';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { ProductService } from './shared/product.service';
+import { FilterPipe } from './pipe/filter.pipe';
 
  const routeConfig: Routes = [
    {path: '', component: HomeComponent},
@@ -30,13 +31,15 @@ import { ProductService } from './shared/product.service';
     ProductComponent,
     StartsComponent,
     HomeComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(routeConfig)
   ],
   providers: [ProductService],
